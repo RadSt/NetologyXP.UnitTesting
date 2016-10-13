@@ -12,6 +12,11 @@
  */
 import assert from 'assert'
 
+class Order {
+    get orderTime() {return 15;}
+    get pizzaQty() {return 2;}
+}
+
 class Client {
     birthdayDay(){return true;}
     notBirthdayDay(){return false;}
@@ -42,6 +47,13 @@ class PizzaShop{
 
     getBonusAccountDiscountAfterOrder(){
         return 5;
+    }
+
+    getTimeAndQtyDiscount(time, qty){
+        if(time >= 10 && time <= 16 && qty >= 2){
+            return 20;
+        }
+        return 0;
     }
 }
 
@@ -112,17 +124,19 @@ suite('PizzaOrderTest', function() {
 suite('WhenCodeWasEntered', function() {
     test('ClientGetDiscount100Rubles', function() {
         let pizzaShop = new PizzaShop();
+        let promocode = "ABCD";
 
         let discount = pizzaShop.getDiscountByPromocode(promocode);
 
         assert.equal(100, discount);
     });
-    test('ClientCantGetDiscount500Rubles', function() {
+    test('ClientCanNOTGetDiscount500Rubles', function() {
        let pizzaShop = new PizzaShop();
+        let promocode = "ABCD";
 
         let discount = pizzaShop.getDiscountByPromocode(promocode);
 
-        assert.equal(500, discount);
+        assert.equal(false, discount === 500);
     })
 });
 
@@ -141,7 +155,32 @@ suite('BonusAccountDiscountShould', function() {
 
         let discountPercent = pizzaShop.getBonusAccountDiscountAfterOrder();
 
-        assert.equal(50, discountPercent);
+        assert.equal(false, discountPercent === 50);
+    })
+});
+
+//When<Action>.<Arrange><Assert>
+// * При заказе от 2х пицц с 10:00 по 16:00 скидка 20%
+suite('WhenOrderPizzaNumIs2AndOrderTimeBetween10And16', function() {
+    test('ClientGetDiscount20Percent', function() {
+        let pizzaShop = new PizzaShop();
+        let order = new Order();
+        let time = order.orderTime;
+        let quantity = order.pizzaQty;
+
+        let discount = pizzaShop.getTimeAndQtyDiscount(time, quantity);
+
+        assert.equal(20, discount);
+    });
+    test('ClientCanNOTGetDiscount30Percent', function() {
+        let pizzaShop = new PizzaShop();
+        let order = new Order();
+        let time = order.orderTime;
+        let quantity = order.pizzaQty;
+
+        let discount = pizzaShop.getTimeAndQtyDiscount(time, quantity);
+
+        assert.equal(false, discount === 30);
     })
 });
 
