@@ -162,6 +162,10 @@ suite('BonusAccountDiscountShould', function() {
 //When<Action>.<Arrange><Assert>
 // * При заказе от 2х пицц с 10:00 по 16:00 скидка 20%
 suite('WhenOrderPizzaNumIs2AndOrderTimeBetween10And16', function() {
+    // Можно еще назвать:
+    // OrderPizzaNumIs2AndOrderTimeBetween10And16_Client_GetDiscount
+    // GetDiscount_IfClientOrderPizzaNumIs2AndOrderTimeBetween10And16
+    // Помоему ClientGetDiscount20Percent лучше отражает содержимое теста
     test('ClientGetDiscount20Percent', function() {
         let pizzaShop = new PizzaShop();
         let order = new Order();
