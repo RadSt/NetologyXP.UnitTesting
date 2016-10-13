@@ -20,6 +20,16 @@ class Client {
             default: return false;
         }
     }
+
+    orderBirthdayPizza(isBirthday){
+        if(isBirthday){
+            return true;
+        }
+        return false;
+    }
+
+    birthdayDay(){return true;}
+    notBirthdayDay(){return false;}
 }
 
 //<Assert>.<Arrange>
@@ -38,5 +48,26 @@ suite('MakeOrder', function() {
         let bearOrdered = client.makeOrder("bear");
 
         assert.equal(false, bearOrdered);
+    })
+});
+
+//<ClassNameTests>.<Act>_<Arrange>_<Assert>
+// * Если у клиента день рождения, ему полагается специальная сладкая пицца
+suite('PizzaOrderTest', function() {
+    test('OrderPizza_ClientBirthdayDay_RecieveGiftSweetPizza', function() {
+        let client = new Client();
+        let isBirthday = client.birthdayDay();
+
+        let sweetPizzaGift = client.orderBirthdayPizza(isBirthday);
+
+        assert.equal(true, sweetPizzaGift);
+    });
+    test('OrderPizza_ClientNOTBirthdayDay_RecieveGiftSweetPizza', function() {
+        let client = new Client();
+        let isBirthday = client.notBirthdayDay();
+
+        let sweetPizzaGift = client.orderBirthdayPizza(isBirthday);
+
+        assert.equal(false, sweetPizzaGift);
     })
 });
