@@ -30,6 +30,13 @@ class Client {
 
     birthdayDay(){return true;}
     notBirthdayDay(){return false;}
+
+    getDiscountByPromocode(code){
+        if(code === "ABC"){
+            return 100;
+        }
+        return 0;
+    }
 }
 
 //<Assert>.<Arrange>
@@ -71,3 +78,25 @@ suite('PizzaOrderTest', function() {
         assert.equal(false, sweetPizzaGift);
     })
 });
+
+//When<Action>.<Arrange><Assert>
+// * При вводе промокода "ABCD", скидка 100 рублей
+suite('WhenCodeWasEntered', function() {
+    test('ClientGetDiscount100Rubles', function() {
+        let client = new Client();
+        let promocode = "ABC";
+
+        let discount = client.getDiscountByPromocode(promocode);
+
+        assert.equal(100, discount);
+    });
+    test('ClientCantGetDiscount500Rubles', function() {
+        let client = new Client();
+        let promocode = "ABC";
+
+        let discount = client.getDiscountByPromocode(promocode);
+
+        assert.equal(500, discount);
+    })
+});
+
