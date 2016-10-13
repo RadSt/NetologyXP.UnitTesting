@@ -106,5 +106,24 @@ suite('WhenCodeWasEntered', function() {
     })
 });
 
+// <ClassName>Should.<Assert>_<Arrange>
+// * 5% от заказа на бонусный счет
+suite('BonusAccountDiscountShould', function() {
+    test('ShouldBe5Percent_Always', function() {
+        let pizzaShop = new PizzaShop();
+
+        let discountPercent = pizzaShop.getBonusAccountDiscountAfterOrder();
+
+        assert.equal(5, discountPercent);
+    });
+    test('ShouldNOTBe50Percent_Always', function() {
+        let pizzaShop = new PizzaShop();
+
+        let discountPercent = pizzaShop.getBonusAccountDiscountAfterOrder();
+
+        assert.equal(50, discountPercent);
+    })
+});
+
 
 
