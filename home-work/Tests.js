@@ -13,6 +13,11 @@
 import assert from 'assert'
 
 class Client {
+    birthdayDay(){return true;}
+    notBirthdayDay(){return false;}
+}
+
+class PizzaShop{
     makeOrder(product) {
         switch(product){
             case "pizza":
@@ -28,14 +33,15 @@ class Client {
         return false;
     }
 
-    birthdayDay(){return true;}
-    notBirthdayDay(){return false;}
-
     getDiscountByPromocode(code){
         if(code === "ABC"){
             return 100;
         }
         return 0;
+    }
+
+    getBonusAccountDiscountAfterOrder(){
+        return 5;
     }
 }
 
@@ -43,16 +49,16 @@ class Client {
 // * Клиент может заказать пицу на сайте
 suite('MakeOrder', function() {
     test('CanOrderPizza', function() {
-        let client = new Client();
+        let pizzaShop = new PizzaShop();
 
-        let pizzaOrdered = client.makeOrder("pizza");
+        let pizzaOrdered = pizzaShop.makeOrder("pizza");
 
         assert.equal(true, pizzaOrdered);
     });
     test('rejectedOrderBear', function() {
-        let client = new Client();
+        let pizzaShop = new PizzaShop();
 
-        let bearOrdered = client.makeOrder("bear");
+        let bearOrdered = pizzaShop.makeOrder("bear");
 
         assert.equal(false, bearOrdered);
     })
@@ -64,16 +70,18 @@ suite('PizzaOrderTest', function() {
     test('OrderPizza_ClientBirthdayDay_RecieveGiftSweetPizza', function() {
         let client = new Client();
         let isBirthday = client.birthdayDay();
+        let pizzaShop = new PizzaShop();
 
-        let sweetPizzaGift = client.orderBirthdayPizza(isBirthday);
+        let sweetPizzaGift = pizzaShop.orderBirthdayPizza(isBirthday);
 
         assert.equal(true, sweetPizzaGift);
     });
     test('OrderPizza_ClientNOTBirthdayDay_RecieveGiftSweetPizza', function() {
         let client = new Client();
         let isBirthday = client.notBirthdayDay();
+        let pizzaShop = new PizzaShop();
 
-        let sweetPizzaGift = client.orderBirthdayPizza(isBirthday);
+        let sweetPizzaGift = pizzaShop.orderBirthdayPizza(isBirthday);
 
         assert.equal(false, sweetPizzaGift);
     })
@@ -83,20 +91,20 @@ suite('PizzaOrderTest', function() {
 // * При вводе промокода "ABCD", скидка 100 рублей
 suite('WhenCodeWasEntered', function() {
     test('ClientGetDiscount100Rubles', function() {
-        let client = new Client();
-        let promocode = "ABC";
+        let pizzaShop = new PizzaShop();
 
-        let discount = client.getDiscountByPromocode(promocode);
+        let discount = pizzaShop.getDiscountByPromocode(promocode);
 
         assert.equal(100, discount);
     });
     test('ClientCantGetDiscount500Rubles', function() {
-        let client = new Client();
-        let promocode = "ABC";
+       let pizzaShop = new PizzaShop();
 
-        let discount = client.getDiscountByPromocode(promocode);
+        let discount = pizzaShop.getDiscountByPromocode(promocode);
 
         assert.equal(500, discount);
     })
 });
+
+
 
