@@ -10,7 +10,7 @@
  * 5% от заказа на бонусный счет
  * Для оплаты заказа можно использовать средства с бонусного счета
  */
-import assert from 'assert'
+var assert = require('assert');
 
 class Order {
     get orderTime() {return 15;}
@@ -39,7 +39,7 @@ class PizzaShop{
     }
 
     getDiscountByPromocode(code){
-        if(code === "ABC"){
+        if(code === "ABCD"){
             return 100;
         }
         return 0;
