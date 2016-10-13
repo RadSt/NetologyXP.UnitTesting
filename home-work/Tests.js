@@ -48,6 +48,11 @@ class PizzaShop{
 //<Assert>.<Arrange>
 // * Клиент может заказать пицу на сайте
 suite('MakeOrder', function() {
+    // Можно еще назвать:
+    // OrderPizza_Client_Accepted
+    // GetPizza_IfClientMakeOrder
+    // PizzaCanOrdered
+    // Помоему PizzaCanOrdered лучше бы отражало содержимое теста
     test('CanOrderPizza', function() {
         let pizzaShop = new PizzaShop();
 
@@ -55,6 +60,11 @@ suite('MakeOrder', function() {
 
         assert.equal(true, pizzaOrdered);
     });
+    // Можно еще назвать:
+    // OrderBear_Client_Rejected
+    // NOTGetBear_IfClientMakeOrder
+    // BearCanNotOrdered
+    // Помоему BearCanNotOrdered лучше бы отражало содержимое теста
     test('rejectedOrderBear', function() {
         let pizzaShop = new PizzaShop();
 
@@ -67,6 +77,11 @@ suite('MakeOrder', function() {
 //<ClassNameTests>.<Act>_<Arrange>_<Assert>
 // * Если у клиента день рождения, ему полагается специальная сладкая пицца
 suite('PizzaOrderTest', function() {
+    // Можно еще назвать:
+    // ClientRecieveSweetPizza
+    // RecieveForClient
+    // Помоему OrderPizza_ClientBirthdayDay_RecieveGiftSweetPizza лучше
+    // отражает содержимое теста, сразу видно что тестируем какие входящие данные и что получим
     test('OrderPizza_ClientBirthdayDay_RecieveGiftSweetPizza', function() {
         let client = new Client();
         let isBirthday = client.birthdayDay();
@@ -76,6 +91,11 @@ suite('PizzaOrderTest', function() {
 
         assert.equal(true, sweetPizzaGift);
     });
+    // Можно еще назвать:
+    // ClientNOTRecieveSweetPizza
+    // NOTRecieveForClient
+    // Помоему OrderPizza_ClientNOTBirthdayDay_RecieveGiftSweetPizza лучше
+    // отражает содержимое теста, сразу видно что тестируем какие входящие данные и что получим
     test('OrderPizza_ClientNOTBirthdayDay_RecieveGiftSweetPizza', function() {
         let client = new Client();
         let isBirthday = client.notBirthdayDay();
